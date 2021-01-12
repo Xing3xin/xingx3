@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset='UTF-8'>
+      <title>特效</title>
+      <meta name='Keywords' content=''>
+      <meta name='Description' content=''>
+      <style>
+         body{
+            margin: 0;
+         } 
+      </style>
+   </head>
+   <body>
+        <!--style-->
+       <canvas id="canvas" width="480px" height= "320px" style="background-color: #000;" ></canvas>
+    <script>
+         //get element
+         //byid
+         var canvas = document.getElementById("canvas");
+         var ctx = canvas.getContext("2d");
+         /* Get screen size with same align
+           1. get screen
+           2. get width & height
+           3. screen set
+         */
+         //get window screen 
+         var s = window.screen;
+  >         // 
+         var h = s.height;
+         //
+         canvas.width = w;
+         canvas.height = h;
+         var fontSize = 14;
+         var drops = [];
+         var str = "10 100 1001 1110 1100 101010 101110";
+          //output
+          //font size
+          //width per line
+          var clos = Math.floor(w/fontSize);
+          //clos 0 for repeat
+          for(var i=0;i<clos;i++){
+               drops.push(0);
+          }
+          function drawString() {
+               ctx.fillStyle = "rgba(0,0,0,0.05)"
+               ctx.fillRect(0,0,w,h);
+               ctx.font = "700 "+fontSize+"px black";
+               ctx.fillStyle = "#00ff00";
+               for(var i=0;i<clos;i++){
+                   // x axis
+                   var x = i*fontSize;
+                   //y axis
+                   var y = drops[i]*fontSize;
+                   ctx.fillText(str[Math.floor(Math.random()*str.length)],x,y);
+                   if( y>h&&Math.random()>0.99) {
+                        drops[i] = 0;
+                   }
+                   drops[i]++;
+              }
+
+            }
+            setInterval(drawString,20);
+      </script>
+   </body>
+</html>
